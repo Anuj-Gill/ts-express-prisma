@@ -1,0 +1,27 @@
+{
+  "name": "tsstarter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier . --write",
+    "lint:fix": "eslint . --fixx",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "prettier": "3.3.3",
+    "typescript-eslint": "^8.6.0"
+  },
+  "dependencies": {
+    "typescript": "^5.6.2"
+  }
+}
