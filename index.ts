@@ -1,3 +1,3 @@
 const studentName: string = "Anuj";
 const rollNo: number = 123;
-console.log(studentName, rollNo,"hello wod");
+console.log(studentName, rollNo,"helod");
