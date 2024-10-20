@@ -12,3 +12,24 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+	id Int @id @default(autoincrement())
+	refresh_token String? // Optional
+	name String
+	email String @unique
+	password String?
+	roleId Int?   // Optional, related to roles.id
+	gender String
+	verificationsStatus Boolean @default(false)
+	role Role? @relation(fields: [roldeId], references: [id])
+	academicInfo AcademicInfo?
+	participants Participant[]
+}
+
+model Role {
+	id Int @id @default(autoincrement())
+	role_name String
+	role_code String
+	users User[] //one role can have multiple users
+}

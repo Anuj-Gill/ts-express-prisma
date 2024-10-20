@@ -6,7 +6,8 @@
     "lint": "eslint .",
     "format": "npx prettier . --write",
     "lint:fix": "eslint . --fixx",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "ts-node index.ts --watch"
   },
   "keywords": [],
   "author": "",
@@ -14,17 +15,22 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.7.4",
+    "dotenv": "^16.4.5",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
+    "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "prisma": "^5.20.0",
     "ts-node": "^10.9.2",
     "typescript-eslint": "^8.6.0"
   },
   "dependencies": {
+    "express": "^4.21.1",
     "pg": "^8.13.0",
     "typescript": "^5.6.2"
   }
