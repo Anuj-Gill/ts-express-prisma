@@ -10,6 +10,87 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DB_URL")
 }
 
+model User {
+	id Int @id @default(autoincrement())
+	refreshToken String? // Optional
+	name String 
+	email String @unique
+	password String?
+	roleId Int  // Related to roles.id
+	gender String
+	verificationStatus Boolean @default(false)
+	role Role @relation(fields: [roleId], references: [id])
+	academicInfo AcademicInfo?
+	participants Participant[]
+}
+
+model Role {
+	id Int @id @default(autoincrement())
+	roleName String
+	roleCode String?
+	users User[] //one role can have multiple users
+}
+
+model Committee {
+	id Int @id @default(autoincrement())
+	committeeName String
+	description String
+	pubs Publicity[] //one committee can have multiple pubs
+	events Event[] // one committe can have multiple events
+	socialHandles CommitteeSocialHandle[] // one committee can have multiple social handles
+}
+
+model CommitteeSocialHandle {
+	id Int @id @default(autoincrement())
+	committeeId Int //related to Committees.id
+	platform String
+	handle String
+	committee Committee @relation(fields: [committeeId], references: [id])
+}
+
+model Publicity {
+	id Int @id @default(autoincrement())
+	committeeId Int
+	name String
+	contact String
+	committee Committee @relation(fields: [committeeId],references: [id])
+}
+	
+model Event { 	
+	id Int @id @default(autoincrement())
+	eventName String
+	eventPoster String
+	dateTime DateTime
+	venue String
+	about String
+	isOnline Boolean @default(false)
+	prize String?
+	entryFee Decimal?
+	team Boolean @default(false)
+	committeeId Int
+	committee Committee @relation(fields: [committeeId], references: [id])
+	participants Participant[]
+}	
+
+model Participant {
+	id Int @id @default(autoincrement())
+	userId Int 
+	eventId Int
+	registrationDate DateTime
+	teamCode String?
+	user User @relation(fields: [userId], references: [id])
+	event Event @relation(fields: [eventId], references: [id])
+}
+
+model AcademicInfo {
+	id Int @id @default(autoincrement())
+	userId Int @unique //made it unique due to one-to-one relation
+	department String
+	year Int
+	division String
+	rollNo String
+	user User @relation(fields: [userId], references: [id])
+}
